@@ -2,8 +2,10 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const noteModel = require('./models/note.model')
+const path = require('path')
 app.use(cors());
 app.use(express.json());
+app.use(express.static('./public'));
 
 app.get('/', (req, res) => {
     res.send("Hi, I am Backend...")
@@ -32,7 +34,7 @@ app.get('/notes', async (req, res) => {
     })
 })
 
-app.delete('/api/notes/:id', async (req, res) => {
+app.delete('/notes/:id', async (req, res) => {
     const id = req.params.id
 
     await noteModel.findByIdAndDelete(id)
@@ -47,7 +49,7 @@ app.delete('/api/notes/:id', async (req, res) => {
  * - update the description of the note by id
  * - req.body = {description}
  */
-app.patch('/api/notes/:id', async (req, res) => {
+app.patch('/notes/:id', async (req, res) => {
     const id = req.params.id
     const { description } = req.body
 
@@ -57,6 +59,10 @@ app.patch('/api/notes/:id', async (req, res) => {
         message: "Note updated successfully."
     })
 
+})
+
+app.use('*name', (req, res) => {
+    res.sendFile(path.join(__dirname, "../public/index.html"))
 })
 
 module.exports = app;
