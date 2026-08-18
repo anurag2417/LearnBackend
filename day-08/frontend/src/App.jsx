@@ -10,7 +10,7 @@ const App = () => {
   console.log("Hello Integration")
 
   const fetchNotes = () => {
-    axios.get('http://localhost:3000/notes')
+    axios.get('https://learnbackend-xmau.onrender.com/notes')
       .then((res) => {
         setNotes(res.data.notes);
       })
@@ -27,7 +27,7 @@ const App = () => {
 
     console.log(title.value, description.value);
 
-    axios.post('http://localhost:3000/notes', {
+    axios.post('https://learnbackend-xmau.onrender.com/notes', {
       title: title.value,
       description: description.value
     })
@@ -39,7 +39,7 @@ const App = () => {
   }
 
   const deleteHandler = (noteId) => {
-    axios.delete("http://localhost:3000/notes/"+noteId)
+    axios.delete("https://learnbackend-xmau.onrender.com/notes/"+noteId)
       .then(() => {
         fetchNotes()
       })
