@@ -57,7 +57,7 @@ const App = () => {
         <br />
         <button>Create Note</button>
       </form>
-      <div className="notes">
+      <div className="notes"> 
         {
           notes.map((note, idx) => {
             return <div key={idx} className="card">
